@@ -1,0 +1,31 @@
+# .github/workflows/deploy.yml
+name: Deploy on Push
+
+on:
+  push:
+    branches:
+      - mains
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Tailscale
+        run: |
+            curl -fsSL https://tailscale.com/install.sh | sh
+            sudo tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }} --hostname gha-runner --ssh
+
+      - name: Setup SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: SSH into CI/CD server and deploy
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no root@${{ secrets.MACHINE_IP }} "
+            cd ~/cicd-portfolio &&
+            git pull &&
+            sudo docker compose up -d
+          "
