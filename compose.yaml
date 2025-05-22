@@ -1,0 +1,9 @@
+services:
+  gin-app:
+    image: golang:1.24
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./file:/app
+    working_dir: /app
+    command: go run main.go
