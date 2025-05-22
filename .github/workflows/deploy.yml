@@ -24,7 +24,7 @@ jobs:
 
       - name: SSH into CI/CD server and deploy
         run: |
-          ssh -i key.pem -o StrictHostKeyChecking=no root@${{ secrets.MACHINE_IP }} -v"
+          ssh -i key.pem -o StrictHostKeyChecking=no root@${{ secrets.MACHINE_IP }}"
             cd ~/cicd-portfolio &&
             git pull &&
             sudo docker compose down &&
