@@ -9,7 +9,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "HELLO COMMIT VIEWER OK?")
+		c.String(http.StatusOK, "not yet rdy")
 	})
 
 	r.Run(":8888")
