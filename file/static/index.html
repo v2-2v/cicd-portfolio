@@ -430,7 +430,7 @@
                 <div class="hero-content">
                     <h1>{{ portfolio.name }}のポートフォリオ</h1>
                     <p>{{ portfolio.title }}</p>
-                    <p>PCで見ることを推奨します</p>
+                    <p>PCでの閲覧を推奨します</p>
                     <a href="#about" @click="scrollTo('about')" class="cta-button">プロフィール</a>
                 </div>
             </section>
@@ -476,8 +476,11 @@
                                 <div class="project-tech">
                                     <span v-for="tech in project.technologies" :key="tech" class="tech-tag">{{ tech }}</span>
                                 </div>
-                                <div class="project-links">
+                                <div class="project-links" v-if="project.code !== 'None'">
                                     <a :href="project.code" class="project-link" target="_blank" rel="noopener noreferrer">詳しく見る</a>
+                                </div>
+                                <div class="project-links" v-if="project.code === 'None'">
+                                    <p class="project-link">準備中</p>
                                 </div>
                             </div>
                         </div>
@@ -526,8 +529,11 @@
                         title: "神奈川工科大学 情報学部情報工学科 27卒",
                         myname:"水野利紅 (みずの りく)",
                         about: `
-                        
-                        で
+                        初めまして、ポートフォリオを見ていただきありがとうございます！
+                        プログラミングでのものづくりに興味があり、ハッカソンやPBL（課題解決型学習）にも
+                        参加させていただいてます！好きな理由と致しましては新しい技術を触ったり
+                        実際に動く成果物を作るのが好きだからです！
+                        人柄としては「優しい」「聞き上手」などが多く、チームでのコミュニケーションも大切にしています。
                         `,
                         skills: [
                             {
@@ -627,7 +633,7 @@
                                 id: 3,
                                 title: "晒し屋時計",
                                 description: "ハッカソンにて作成、画面描画や設定画面などのメイン部分を担当",
-                                code: "",
+                                code: "None",
                                 technologies: ["Flask","Tailscale funnel","Raspberry Pi"],
                                 icon: "⏰"
                             },
@@ -659,7 +665,7 @@
                                 id: 7,
                                 title: "フルスタックメモ",
                                 description: "フルスタックで動作するメモアプリ(開発中)",
-                                code: "",
+                                code: "None",
                                 technologies: ["Gin","websocket","Redis","PostgreSQL","NGINX", "Cloudflare","Proxmox"],
                                 icon: "📝"
                             },
@@ -667,7 +673,7 @@
                                 id: 8,
                                 title: "Dasein(ダーザイン)",
                                 description: "他大学と多人数で共同で作成するお散歩推進アプリ(開発中)",
-                                code: "",
+                                code: "None",
                                 technologies: [""],
                                 icon: "🚶‍♂️"
                             },
