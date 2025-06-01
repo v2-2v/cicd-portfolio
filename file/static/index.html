@@ -348,6 +348,7 @@
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
+            margin-bottom: 16px;
         }
 
         .submit-button {
@@ -484,19 +485,30 @@
 
             <!-- コンタクトセクション -->
             <section id="contact" class="contact">
+                
+                
+
                 <div class="container">
-                    <div class="contact-content fade-in">
-                        <h2 class="section-title">コンタクト</h2>
-                        <p>ここにQiitaとGithubとメアドはる</p>
+                    <h2 class="section-title fade-in">Link and Info</h2>
+                    <div class="contact-content">
+                        <a href="https://github.com/v2-2v" target="_blank" class="cta-button">GitHub</a>
+                    </div>
+                    <div class="contact-content">
+                        <a href="https://qiita.com/v2-2v" target="_blank" class="cta-button">Qiita</a>
+                    </div>
+                    <div class="contact-content">
+                        <a href="mailto:s2321191@cco.kanagawa-it.ac.jp" class="cta-button">s2321191@cco.kanagawa-it.ac.jp</a>
 
                     </div>
                 </div>
+
+                
             </section>
         </main>
 
         <footer>
             <div class="container">
-                <p>&copy; 2025 {{ portfolio.name }}. All rights reserved.</p>
+                <p>&copy; 2025 {{ portfolio.name }}. All rights reserved. made with AI</p>
             </div>
         </footer>
     </div>
@@ -520,7 +532,7 @@
                             {
                                 name: "Go",
                                 icon: "🐹",
-                                description: "Pythonでは足りない実用向けとして勉強中"
+                                description: "Pythonでは足りない実用向けとして"
                             },
                             {
                                 name: "Java",
@@ -543,14 +555,14 @@
                                 description: "KVM、Dockerを用いて開発、運用"
                             },
                             {
-                                name: "Git",
-                                icon: "📚",
-                                description: "バージョン管理やコード共有に活用"
-                            },
-                            {
-                                name: "Linux",
+                                name: "Linux/Unix",
                                 icon: "🐧",
                                 description: "Linuxサーバ、Macbookを常用"
+                            },
+                            {
+                                name: "GitHub/GitHub Actions",
+                                icon: "⚙️",
+                                description: "チームでのコード共有、CI/CDに活用"
                             },
                             {
                                 name: "情報発信",
@@ -617,7 +629,7 @@
                                 title: "フルスタックメモ",
                                 description: "フルスタックで動作するメモアプリ(開発中)",
                                 code: "",
-                                technologies: ["Gin","websocket","Redis"],
+                                technologies: ["Gin","websocket","Redis","PostgreSQL","NGINX", "Cloudflare","Proxmox"],
                                 icon: "📝"
                             },
                             {
