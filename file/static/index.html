@@ -428,8 +428,9 @@
             <!-- ヒーローセクション -->
             <section id="home" class="hero">
                 <div class="hero-content">
-                    <h1>{{ portfolio.name }}のCI/CDポートフォリオ</h1>
+                    <h1>{{ portfolio.name }}のポートフォリオ</h1>
                     <p>{{ portfolio.title }}</p>
+                    <p>PCで見ることを推奨します</p>
                     <a href="#about" @click="scrollTo('about')" class="cta-button">プロフィール</a>
                 </div>
             </section>
@@ -441,6 +442,7 @@
                     <div class="about-content fade-in">
                         <div class="about-image">👨‍💻</div>
                         <div class="about-text">
+                            <h2>{{ portfolio.myname }}</h2>
                             <p>{{ portfolio.about }}</p>
                         </div>
                     </div>
@@ -522,7 +524,11 @@
                     portfolio: {
                         name: "水野利紅",
                         title: "神奈川工科大学 情報学部情報工学科 27卒",
-                        about: "ここにあとでかく",
+                        myname:"水野利紅 (みずの りく)",
+                        about: `
+                        
+                        で
+                        `,
                         skills: [
                             {
                                 name: "Python",
@@ -550,6 +556,11 @@
                                 description: "iPhoneアプリを通じて勉強中"
                             },
                             {
+                                name: "Vue.js",
+                                icon: "🖼️",
+                                description: "デザインの重要性を学び、苦戦しながら勉強中"
+                            },
+                            {
                                 name: "仮想化技術",
                                 icon: "🐳",
                                 description: "KVM、Dockerを用いて開発、運用"
@@ -560,9 +571,24 @@
                                 description: "Linuxサーバ、Macbookを常用"
                             },
                             {
-                                name: "GitHub/GitHub Actions",
+                                name: "ドメイン管理、CF Works",
+                                icon: "☁️🔥",
+                                description: "Cloudflare Worksを活用しエラーハンドリング"
+                            },
+                            {
+                                name: "WEBサーバの設定、運用",
+                                icon: "🌐",
+                                description: "証明書取得、サブドメインの設定"
+                            },
+                            {
+                                name: "Git/GitHub",
+                                icon: "📚",
+                                description: "チームでのコード共有に活用"
+                            },
+                            {
+                                name: "CI/CD",
                                 icon: "⚙️",
-                                description: "チームでのコード共有、CI/CDに活用"
+                                description: "GitHub Actionsを活用し開発"
                             },
                             {
                                 name: "情報発信",
@@ -571,8 +597,13 @@
                             },
                             {
                                 name: "最新技術の活用",
-                                icon: "🤖",
+                                icon: "📡",
                                 description: "AIエディタや最新ライブラリなどの最新技術を触って試す"
+                            },
+                            {
+                                name: "IoTデバイスの活用",
+                                icon: "🍓",
+                                description: "Raspberry PiとNFCで部屋の解錠"
                             }
                         ],
                         projects: [
@@ -595,9 +626,9 @@
                             {
                                 id: 3,
                                 title: "晒し屋時計",
-                                description: "ハッカソンにて作成、XXXXXXXを担当",
+                                description: "ハッカソンにて作成、画面描画や設定画面などのメイン部分を担当",
                                 code: "",
-                                technologies: ["Flask","Tailscale funnel"],
+                                technologies: ["Flask","Tailscale funnel","Raspberry Pi"],
                                 icon: "⏰"
                             },
                             {
@@ -635,9 +666,9 @@
                             {
                                 id: 8,
                                 title: "Dasein(ダーザイン)",
-                                description: "他大学と共同で作成するお散歩推進アプリ(開発中)",
+                                description: "他大学と多人数で共同で作成するお散歩推進アプリ(開発中)",
                                 code: "",
-                                technologies: ["Swift"],
+                                technologies: [""],
                                 icon: "🚶‍♂️"
                             },
                         ]
