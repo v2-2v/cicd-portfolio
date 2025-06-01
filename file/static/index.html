@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水野利紅 ポートフォリオ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* セクション共通スタイル */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About セクション */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* スキルセクション */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 2px solid #667eea;
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* プロジェクトセクション */
+        .projects {
+            background: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #764ba2;
+        }
+
+        /* コンタクトセクション */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .submit-button {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .submit-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* フッター */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* スクロールアニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <nav class="container">
+                <div class="logo">{{ portfolio.name }}</div>
+                <ul class="nav-links">
+                    <li><a href="#home" @click="scrollTo('home')">ホーム</a></li>
+                    <li><a href="#about" @click="scrollTo('about')">プロフィール</a></li>
+                    <li><a href="#skills" @click="scrollTo('skills')">スキル</a></li>
+                    <li><a href="#projects" @click="scrollTo('projects')">プロジェクト</a></li>
+                    <li><a href="#contact" @click="scrollTo('contact')">コンタクト</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- ヒーローセクション -->
+            <section id="home" class="hero">
+                <div class="hero-content">
+                    <h1>{{ portfolio.name }}のCI/CDポートフォリオ</h1>
+                    <p>{{ portfolio.title }}</p>
+                    <a href="#about" @click="scrollTo('about')" class="cta-button">プロフィール</a>
+                </div>
+            </section>
+
+            <!-- プロフィールセクション -->
+            <section id="about" class="about">
+                <div class="container">
+                    <h2 class="section-title fade-in">プロフィール</h2>
+                    <div class="about-content fade-in">
+                        <div class="about-image">👨‍💻</div>
+                        <div class="about-text">
+                            <p>{{ portfolio.about }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- スキルセクション -->
+            <section id="skills" class="skills">
+                <div class="container">
+                    <h2 class="section-title fade-in">スキル</h2>
+                    <div class="skills-grid fade-in">
+                        <div v-for="skill in portfolio.skills" :key="skill.name" class="skill-card">
+                            <div class="skill-icon">{{ skill.icon }}</div>
+                            <h3>{{ skill.name }}</h3>
+                            <p>{{ skill.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- プロジェクトセクション -->
+            <section id="projects" class="projects">
+                <div class="container">
+                    <h2 class="section-title fade-in">プロジェクト</h2>
+                    <div class="projects-grid fade-in">
+                        <div v-for="project in portfolio.projects" :key="project.id" class="project-card">
+                            <div class="project-image">{{ project.icon }}</div>
+                            <div class="project-content">
+                                <h3 class="project-title">{{ project.title }}</h3>
+                                <p class="project-description">{{ project.description }}</p>
+                                <div class="project-tech">
+                                    <span v-for="tech in project.technologies" :key="tech" class="tech-tag">{{ tech }}</span>
+                                </div>
+                                <div class="project-links">
+                                    <a :href="project.code" class="project-link" target="_blank" rel="noopener noreferrer">詳しく見る</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- コンタクトセクション -->
+            <section id="contact" class="contact">
+                <div class="container">
+                    <div class="contact-content fade-in">
+                        <h2 class="section-title">コンタクト</h2>
+                        <p>ここにQiitaとGithubとメアドはる</p>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 {{ portfolio.name }}. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    portfolio: {
+                        name: "水野利紅",
+                        title: "神奈川工科大学 情報学部情報工学科 27卒",
+                        about: "ここにあとでかく",
+                        skills: [
+                            {
+                                name: "Python",
+                                icon: "🐍",
+                                description: "開発で使用してきたメイン言語"
+                            },
+                            {
+                                name: "Go",
+                                icon: "🐹",
+                                description: "Pythonでは足りない実用向けとして勉強中"
+                            },
+                            {
+                                name: "Java",
+                                icon: "☕",
+                                description: "Pythonの便利さを実感"
+                            },
+                            {
+                                name: "C",
+                                icon: "📟",
+                                description: "初めてのポインタに困惑"
+                            },
+                            {
+                                name: "Swift",
+                                icon: "📱",
+                                description: "iPhoneアプリを通じて勉強中"
+                            },
+                            {
+                                name: "仮想化技術",
+                                icon: "🐳",
+                                description: "KVM、Dockerを用いて開発、運用"
+                            },
+                            {
+                                name: "Git",
+                                icon: "📚",
+                                description: "バージョン管理やコード共有に活用"
+                            },
+                            {
+                                name: "Linux",
+                                icon: "🐧",
+                                description: "Linuxサーバ、Macbookを常用"
+                            },
+                            {
+                                name: "情報発信",
+                                icon: "✍️",
+                                description: "Qiitaを利用し、後輩や友人と学習内容をシェア"
+                            },
+                            {
+                                name: "最新技術の活用",
+                                icon: "🤖",
+                                description: "AIエディタや最新ライブラリなどの最新技術を触って試す"
+                            }
+                        ],
+                        projects: [
+                            {
+                                id: 1,
+                                title: "CI/CDポートフォリオサイト",
+                                code: "https://github.com/v2-2v/cicd-portfolio",
+                                description: "CI/CDと仮想サーバを実用するために作ったポートフォリオ",
+                                technologies: ["Gin", "GitHub Actions", "Vue.js" , "NGINX", "Tailscale", "Cloudflare","Proxmox"],
+                                icon: "🌐"
+                            },
+                            {
+                                id: 2,
+                                title: "課題管理アプリ",
+                                description: "DiscordとWEBで管理できる協力型課題管理ツール",
+                                code: "https://github.com/v2-2v/mamoru",
+                                technologies: ["Discord.py", "Flask","Tailscale funnel"],
+                                icon: "📚"
+                            },
+                            {
+                                id: 3,
+                                title: "晒し屋時計",
+                                description: "ハッカソンにて作成、XXXXXXXを担当",
+                                code: "",
+                                technologies: ["Flask","Tailscale funnel"],
+                                icon: "⏰"
+                            },
+                            {
+                                id: 4,
+                                title: "ホールアナライザー",
+                                description: "友人のためのスロット情報収集ツール",
+                                code: "https://github.com/v2-2v/hall_analyzer",
+                                technologies: ["Flask", "Beautiful Soup 4", "NGINX", "Cloudflare","Proxmox"],
+                                icon: "📈"
+                            },
+                            {
+                                id: 5,
+                                title: "コンテナ管理ツール",
+                                description: "友人に自宅サーバーをVPSとして貸すためのコントロールパネル",
+                                code: "https://github.com/v2-2v/PXM",
+                                technologies: ["Flask","NGINX", "Cloudflare","Proxmox"],
+                                icon: "☁️"
+                            },
+                            {
+                                id: 6,
+                                title: "読み上げBOT",
+                                description: "DiscordのチャットをVCで読み上げるBOT",
+                                code: "https://github.com/v2-2v/yomiage_bot",
+                                technologies: ["Discord.py"],
+                                icon: "🗣"
+                            },
+                            {
+                                id: 7,
+                                title: "フルスタックメモ",
+                                description: "フルスタックで動作するメモアプリ(開発中)",
+                                code: "",
+                                technologies: ["Gin","websocket","Redis"],
+                                icon: "📝"
+                            },
+                            {
+                                id: 8,
+                                title: "Dasein(ダーザイン)",
+                                description: "他大学と共同で作成するお散歩推進アプリ(開発中)",
+                                code: "",
+                                technologies: ["Swift"],
+                                icon: "🚶‍♂️"
+                            },
+                        ]
+                    },
+                }
+            },
+            mounted() {
+                this.observeElements();
+            },
+            methods: {
+                scrollTo(elementId) {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                },
+                observeElements() {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    // スクロールアニメーション対象の要素を監視
+                    document.querySelectorAll('.fade-in').forEach(el => {
+                        observer.observe(el);
+                    });
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
