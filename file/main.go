@@ -18,5 +18,9 @@ func main() {
 		c.File("static/index.html")
 	})
 
-	r.Run(":8888") // ポート8080で起動
+	r.GET("/qr", func(c *gin.Context) {
+		c.File("static/qr.png")
+	})
+
+	r.Run(":8888")
 }
