@@ -11,7 +11,7 @@ portfolio
 .env
 # Test binary, built with `go test -c`
 *.test
-
+.DS_Store
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
