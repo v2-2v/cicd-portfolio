@@ -45,6 +45,12 @@
             padding: 1rem 2rem;
         }
 
+        strong {
+            letter-spacing: .8px;
+            padding: 0;
+            margin: 0;
+        }
+
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
@@ -197,7 +203,7 @@
 
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1.8fr;
             gap: 3rem;
             align-items: center;
         }
@@ -444,7 +450,7 @@
                         <div class="about-image">👨‍💻</div>
                         <div class="about-text">
                             <h2>{{ portfolio.myname }}</h2>
-                            <p>{{ portfolio.about }}</p>
+                            <div v-html="portfolio.about"></div>
                         </div>
                     </div>
                 </div>
@@ -531,15 +537,17 @@
                     portfolio: {
                         name: "水野利紅",
                         title: "神奈川工科大学 情報学部情報工学科 27卒",
-                        myname:"水野利紅 (みずの りく)",
+                        myname:"水野 利紅 （みずの りく）",
                         about: `
-                        初めまして、ポートフォリオを見ていただきありがとうございます！
-                        プログラミングでのものづくりに興味があり、ハッカソンやPBL（課題解決型学習）にも
-                        参加しています！プログラミングが好きな理由は、新しい技術を触ったり
-                        実際に動く成果物を作るのが好きだからです！
+                        初めまして！ポートフォリオを見ていただきありがとうございます！プログラミングでの
+                        ものづくりに興味があり、ハッカソンやPBL（課題解決型学習）にも参加をしています！
+                        プログラミングが好きな理由は
+                        <strong>新しい技術を触ったり実際に動く成果物を作るのが好き</strong>
+                        だからです！
+                        </br>
                         人柄としては「優しい」「聞き上手」などが多く、チームでのコミュニケーションも大切にしており、
-                        技術面では「行動が早い」「冷静だけど熱血」などの評価を頂いてます。
-                        まだまだ未熟ではありますがどうぞよろしくお願いします！
+                        技術面では「行動が早い」「冷静だけど熱血」などの評価を頂いてます！まだまだ未熟ではありますが
+                        どうぞよろしくお願いします！
                         `,
                         skills: [
                             {
